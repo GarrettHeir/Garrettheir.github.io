@@ -11,13 +11,13 @@
 	<style>
 		/* TODO 1 */
 		[class="box"] {
-			display: block;
+			display: square;
 			position: absolute;
 			width: 70px;
 			height: 70px;
 			top:100px;
 			left: 0px;
-			background-color: teal;
+			background-color: green;
 			font-size: 300%;
 			text-align: center;
 		}
@@ -39,25 +39,41 @@
 			var boardWidth;
 			var update;
 			var handleBoxClick;
+			var direction;
+			direction = 1;
 
 			// jQuery stuff setup for you
 			box = $('.box');
 			boardWidth = $('.board').width();
 
 			// TODO 2
-
+			var position = 0;
+			var points = 0;
+			var speed = 10;
+			box.css('left', position); // changed the 'left' css property of the box to value of var position
+			box.text (points); // changes the text of the box to display the value of var points
 			
-			var update = function() {
-				// TODO 3 / 6 / 7 / 8
+			var update = function() { 
+				//TODO 3,6,7,8
+				position = position + (speed * direction);
 				
+				if(position > boardWidth) {
+					direction = -1;
+				}
+				if(position < 0) {
+					direction = 1;
+				}
+				box.css('left' , position);
+				box.text(points);
 			};
-
-
 			
 			var handleBoxClick = function() {
 				// TODO 4 / 5
-				
-			};
+					speed = speed + 3;
+					position = 0;
+					points = points + 1;
+					box.text(points);
+			}
 
 
 			//this calls update every 50 milliseconds
